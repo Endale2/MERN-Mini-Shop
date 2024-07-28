@@ -8,21 +8,20 @@ export const getProduct = async(req,res)=>{
         res.json(err)
     }
 }
-export const postProduct = async(req,res)=>{
-    const product = req.body;
-    if(!product.name||!product.price || !product.image){
-        res.json({message:"Fill all the fields"})
+export const postProduct = async (req, res) => {
+    try {
+        const product = new Product({
+            name: req.body.name,
+            price: req.body.price,
+            image: req.body.image
+        });
+        const savedProduct = await product.save();
+        res.status(201).json(savedProduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
+};
 
-    const newProduct = Product(product)
-
-    try{
-        await newProduct.save()
-        res.json(newProduct)
-    }catch(err){
-        res.json(err)
-    }
-}
 
 
 export const deleteProduct = async(req,res)=>{

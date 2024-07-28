@@ -4,7 +4,7 @@ import {getProduct, deleteProduct,postProduct,updateProduct} from "../controller
 
 const router = express.Router()
 
-router.get('/', getProduct)
+router.get('/',  getProduct)
 
 router.post("/", postProduct)
 
